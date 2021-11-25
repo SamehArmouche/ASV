@@ -23,9 +23,9 @@ router.get('/municipios', async (req, res) =>{
   .then(buffer => {
     let decoder = new TextDecoder("iso-8859-1");
     let data = JSON.parse(decoder.decode(buffer));
-    const result = data.filter(item =>  item.nombre.includes(req.query.prefMpio));
     const response=[];
-    result.filter(item => {
+    data.filter(item =>  item.nombre.includes(req.query.prefMpio))
+    .filter(item => {
       itemMun={}
       itemMun ["nombre"]=item.nombre;
       itemMun ["id"] = item.id.substring(2);
@@ -56,8 +56,7 @@ router.get('/prediccion', async (req, res) =>{
   })
   .then(response => response.json())
   .then(async data  =>  {
-    const dataProcesada = await (extractData.getData(data.datos,unidad));
-    res.status(200).json(dataProcesada);
+    res.status(200).json(await (extractData.getData(data.datos,unidad)));
   })
   .catch((err) => res.status(400).json({mensaje: err}));
 });
