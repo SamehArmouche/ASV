@@ -1,6 +1,6 @@
 const fetch = require('cross-fetch')
 
-getData = async (url) => {
+getData = async (url, unidad) => {
   return fetch(url)
   .then(response => response.arrayBuffer())
   .then(buffer => {
@@ -14,6 +14,7 @@ getData = async (url) => {
       itemPrecipitacion={}
       precipitacion={}
       dataRequierida["mediaTemperatura"] = (item.prediccion.dia[1].temperatura.maxima+item.prediccion.dia[1].temperatura.maxima)/2;
+      dataRequierida["unidadTemperatura"]= unidad;
       item.prediccion.dia[1].probPrecipitacion.filter(precipitacionItem =>  {
         itemPrecipitacion["probabilidad"]= precipitacionItem.value;
         itemPrecipitacion["periodo"]= precipitacionItem.periodo; 
@@ -25,4 +26,5 @@ getData = async (url) => {
   })
   .catch((err) => {return err;} );
 };
+
 exports.getData = getData;

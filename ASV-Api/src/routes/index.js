@@ -41,17 +41,26 @@ router.get('/municipios', async (req, res) =>{
 
 
 router.get('/prediccion', async (req, res) =>{
+  var unidad;
+  
+  if(req.query.unidad && req.query.unidad!="G_FAH" && req.query.unidad!="G_CEL"){
+    res.status(400).json({mensaje: "Bad request - unidad de temperatura errónea!"});
+    return;
+  }
+  unidad = (!req.query.unidad) ? 'G_CEL' : req.query.unidad;
+
   if(!req.query.idMpio){
     res.status(400).json({mensaje: "Bad request - falta el parametro idMpio"});
     return;
   }
+
   fetch(API_URL_BASE+'prediccion/especifica/municipio/diaria/'+req.query.idMpio,
   {
     headers: headers
   })
   .then(response => response.json())
   .then(async data  =>  {
-    const dataProcesada = await (extractData.getData(data.datos));
+    const dataProcesada = await (extractData.getData(data.datos,unidad));
     res.status(200).json(dataProcesada);
   })
   .catch((err) => res.status(400).json({mensaje: err}));
