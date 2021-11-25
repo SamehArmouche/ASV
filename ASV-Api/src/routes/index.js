@@ -2,10 +2,8 @@ const { Router } = require('express');
 const router = Router();
 const fetch = require('cross-fetch')
 
-const API_URL = "https://opendata.aemet.es/opendata/api/maestro/municipios" +
-  "?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYTc0QGFsdS51YS5lcyIsImp0aSI6ImY"+
-  "2OWYwOTVlLThhNjItNGMxZi1hZDJlLWI3YzYxZjA2MWM1NCIsImlzcyI6IkFFTUVUIiwiaWF0I" + 
-  "joxNjM3NjcwODkyLCJ1c2VySWQiOiJmNjlmMDk1ZS04YTYyLTRjMWYtYWQyZS1iN2M2MWYwNjFjNTQiLCJyb2xlIjoiIn0.ljG2L_wcF4NvQFAipiQ5AvXXMN9Eg-LS1roprTMs0QI";
+const API_URL_BASE = "https://opendata.aemet.es/opendata/api/";
+const api_key='eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYTc0QGFsdS51YS5lcyIsImp0aSI6ImY2OWYwOTVlLThhNjItNGMxZi1hZDJlLWI3YzYxZjA2MWM1NCIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNjM3NjcwODkyLCJ1c2VySWQiOiJmNjlmMDk1ZS04YTYyLTRjMWYtYWQyZS1iN2M2MWYwNjFjNTQiLCJyb2xlIjoiIn0.ljG2L_wcF4NvQFAipiQ5AvXXMN9Eg-LS1roprTMs0QI';
 
 router.get('/municipios', async (req, res) =>{
   if(!req.query.prefMpio){
@@ -13,7 +11,13 @@ router.get('/municipios', async (req, res) =>{
     return;
   }
   
-  fetch(API_URL)
+  fetch(API_URL_BASE+'maestro/municipios',
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'api_key': api_key
+      }
+    })
   .then(response => response.arrayBuffer())
   .then(buffer => {
     let decoder = new TextDecoder("iso-8859-1");
@@ -28,8 +32,10 @@ router.get('/municipios', async (req, res) =>{
     })
     res.status(200).send(response)
   })
-  .catch(err => res.status(400).json({mensaje: err}));
+  .catch((err) => res.status(400).json({mensaje: err}));
 });
+
+
 
 router.get('/prediccion', (req, res) =>{
   if(!req.query.idMpio){
