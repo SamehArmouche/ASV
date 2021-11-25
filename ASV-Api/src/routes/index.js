@@ -1,9 +1,15 @@
 const { Router } = require('express');
+const  extractData = require('../utils/extractData')
 const router = Router();
 const fetch = require('cross-fetch')
-
 const API_URL_BASE = "https://opendata.aemet.es/opendata/api/";
 const api_key='eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYTc0QGFsdS51YS5lcyIsImp0aSI6ImY2OWYwOTVlLThhNjItNGMxZi1hZDJlLWI3YzYxZjA2MWM1NCIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNjM3NjcwODkyLCJ1c2VySWQiOiJmNjlmMDk1ZS04YTYyLTRjMWYtYWQyZS1iN2M2MWYwNjFjNTQiLCJyb2xlIjoiIn0.ljG2L_wcF4NvQFAipiQ5AvXXMN9Eg-LS1roprTMs0QI';
+const headers ={
+  'Content-Type': 'application/json',
+  'api_key': api_key
+}
+
+
 
 router.get('/municipios', async (req, res) =>{
   if(!req.query.prefMpio){
@@ -13,10 +19,7 @@ router.get('/municipios', async (req, res) =>{
   
   fetch(API_URL_BASE+'maestro/municipios',
     {
-      headers: {
-        'Content-Type': 'application/json',
-        'api_key': api_key
-      }
+      headers:headers
     })
   .then(response => response.arrayBuffer())
   .then(buffer => {
@@ -27,23 +30,31 @@ router.get('/municipios', async (req, res) =>{
     Object.keys(result).forEach(function(key) {
       item = {}
       item ["nombre"] = result[key].nombre;
-      item ["id"] = result[key].id.substring(2);;
+      item ["id"] = result[key].id.substring(2);
       response.push(item);
     })
-    res.status(200).send(response)
+    res.status(200).json(response)
   })
   .catch((err) => res.status(400).json({mensaje: err}));
 });
 
 
 
-router.get('/prediccion', (req, res) =>{
+router.get('/prediccion', async (req, res) =>{
   if(!req.query.idMpio){
     res.status(400).json({mensaje: "Bad request - falta el parametro idMpio"});
     return;
   }
-    res.status(200).send("Ok");
+  fetch(API_URL_BASE+'prediccion/especifica/municipio/diaria/'+req.query.idMpio,
+  {
+    headers: headers
+  })
+  .then(response => response.json())
+  .then(async data  =>  {
+    const dataProcesada = await (extractData.getData(data.datos));
+    res.status(200).json(dataProcesada);
+  })
+  .catch((err) => res.status(400).json({mensaje: err}));
 });
-
 
 module.exports = router;

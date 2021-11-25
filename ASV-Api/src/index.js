@@ -11,7 +11,7 @@ app.use(express.json());
 // routes
 app.use(require('./routes/index'))
 
-
+app.set('json spaces', 2)
 app.listen(PORT, ()=>{
     console.log(`Server on port ${PORT}`);
 });
