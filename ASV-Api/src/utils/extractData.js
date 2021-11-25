@@ -9,11 +9,11 @@ getData = async (url, unidad) => {
     const dataRequierida={};
     const dataPrecipitacion=[];
     const fechaDiaSiguiente=data[0].prediccion.dia[1].fecha;
-    
     const result = data.filter(item =>  {
       itemPrecipitacion={}
       precipitacion={}
-      dataRequierida["mediaTemperatura"] = (item.prediccion.dia[1].temperatura.maxima+item.prediccion.dia[1].temperatura.maxima)/2;
+
+      dataRequierida["mediaTemperatura"] = convertGrados((item.prediccion.dia[1].temperatura.maxima+item.prediccion.dia[1].temperatura.minima)/2,unidad);
       dataRequierida["unidadTemperatura"]= unidad;
       item.prediccion.dia[1].probPrecipitacion.filter(precipitacionItem =>  {
         itemPrecipitacion["probabilidad"]= precipitacionItem.value;
@@ -26,5 +26,9 @@ getData = async (url, unidad) => {
   })
   .catch((err) => {return err;} );
 };
+
+//      //(0 °C × 9 / 5) + 32
+convertGrados =  (temperatura, unidad) => { return unidad ==  'G_CEL' ? temperatura : (temperatura * 9 / 5) + 32; }
+
 
 exports.getData = getData;
