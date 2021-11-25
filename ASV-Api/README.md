@@ -20,7 +20,8 @@
 - [http://localhost:3000/municipios?prefMpio=Aba](http://localhost:3000/municipios?prefMpio=Aba)
 
 
-#### Para obtener la predicción del dia siguiente con el paramtero `idMpio` siendo el id del municipio
+#### Para obtener la predicción del dia siguiente con el paramtero `idMpio` siendo el id del municipio y `unidad` la unidad de temperatura``opcional`` .
+#### Las unidades permitidas `G_FAH` y `G_CEL` 
 
-- [http://localhost:3000/prediccion?idMpio=40001](http://localhost:3000/prediccion?idMpio=40001)
+- [http://localhost:3000/prediccion?idMpio=40001&unidad=G_FAH](http://localhost:3000/prediccion?idMpio=40001&unidad=G_FAH)
 
