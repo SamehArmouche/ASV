@@ -9,7 +9,7 @@ getData = async (url, unidad) => {
     const dataRequierida={};
     const dataPrecipitacion=[];
     const fechaDiaSiguiente=data[0].prediccion.dia[1].fecha;
-    const result = data.filter(item =>  {
+    data.filter(item =>  {
       itemPrecipitacion={}
       precipitacion={}
 

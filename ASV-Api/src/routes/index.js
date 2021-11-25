@@ -9,8 +9,6 @@ const headers ={
   'api_key': api_key
 }
 
-
-
 router.get('/municipios', async (req, res) =>{
   if(!req.query.prefMpio){
     res.status(400).json({mensaje: "Bad request - falta el parametro prefMpio"});
@@ -27,18 +25,16 @@ router.get('/municipios', async (req, res) =>{
     let data = JSON.parse(decoder.decode(buffer));
     const result = data.filter(item =>  item.nombre.includes(req.query.prefMpio));
     const response=[];
-    Object.keys(result).forEach(function(key) {
-      item = {}
-      item ["nombre"] = result[key].nombre;
-      item ["id"] = result[key].id.substring(2);
-      response.push(item);
-    })
+    result.filter(item => {
+      itemMun={}
+      itemMun ["nombre"]=item.nombre;
+      itemMun ["id"] = item.id.substring(2);
+      response.push(itemMun);
+    });
     res.status(200).json(response)
   })
   .catch((err) => res.status(400).json({mensaje: err}));
 });
-
-
 
 router.get('/prediccion', async (req, res) =>{
   var unidad;
