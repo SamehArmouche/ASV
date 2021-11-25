@@ -15,7 +15,12 @@
 ```
 
 ### RUTAS 
-#### Para obtener los municipios que que concuerdan con el prefeijo 
-```url
-http://localhost:3000/municipios?prefMpio=Aba
-```
+#### Para obtener los municipios que que concuerdan con el paramtero `prefMpio` siendo el prefijo de un municipio
+
+- [http://localhost:3000/municipios?prefMpio=Aba](http://localhost:3000/municipios?prefMpio=Aba)
+
+
+#### Para obtener la predicción del dia siguiente con el paramtero `idMpio` siendo el id del municipio
+
+- [http://localhost:3000/prediccion?idMpio=40001](http://localhost:3000/prediccion?idMpio=40001)
+
