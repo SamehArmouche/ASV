@@ -3,7 +3,8 @@ const  extractData = require('../utils/extractData')
 const router = Router();
 const fetch = require('cross-fetch')
 const API_URL_BASE = "https://opendata.aemet.es/opendata/api/";
-const api_key='eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYTc0QGFsdS51YS5lcyIsImp0aSI6ImY2OWYwOTVlLThhNjItNGMxZi1hZDJlLWI3YzYxZjA2MWM1NCIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNjM3NjcwODkyLCJ1c2VySWQiOiJmNjlmMDk1ZS04YTYyLTRjMWYtYWQyZS1iN2M2MWYwNjFjNTQiLCJyb2xlIjoiIn0.ljG2L_wcF4NvQFAipiQ5AvXXMN9Eg-LS1roprTMs0QI';
+const config = require('../../config');
+const api_key=config.API_KEY;
 const headers ={
   'Content-Type': 'application/json',
   'api_key': api_key
