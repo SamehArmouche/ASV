@@ -1,8 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {debounceTime, map, startWith} from 'rxjs/operators';
 
+class Municpio {
+  constructor(public id: string ,public  nombre: string){}
+}
 
 @Component({
   selector: 'app-home',
@@ -10,22 +14,24 @@ import {map, startWith} from 'rxjs/operators';
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
+ 
+  constructor(private http: HttpClient){}
 
   myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<string[]> | undefined;
+  municipios: Municpio[] = [];
+  filteredMunicipios: Observable<Municpio[]> | undefined;
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    this.filteredMunicipios = this.myControl.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value)),
+      debounceTime(800),
+      map(value => this.getMunicipios(value)),
     );
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  private getMunicipios(prefijo: string): Municpio[] {
+  this.http.get<Municpio[]>('http://localhost:3000/municipios?prefMpio='+prefijo)
+  .subscribe(value => { this.municipios=value; });
+    return this.municipios;
   }
-
 }
