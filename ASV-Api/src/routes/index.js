@@ -28,8 +28,8 @@ router.get('/municipios', async (req, res) =>{
     data.filter(item =>  item.nombre.includes(req.query.prefMpio))
     .filter(item => {
       itemMun={}
+      itemMun ["codigo"] = item.id.substring(2);
       itemMun ["nombre"]=item.nombre;
-      itemMun ["id"] = item.id.substring(2);
       response.push(itemMun);
     });
     res.status(200).json(response)
