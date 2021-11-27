@@ -1,0 +1,32 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label style="color: black;">Municipio</mat-label>
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="Municipio"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    
+  </form>
+
+
+<style>
+.example-form {
+  width: 100%;
+  padding: 1%;
+  flex-direction: column;
+}
+
+.example-full-width {
+  width: 70%;
+}
+
+</style>
+  
