@@ -1,7 +1,9 @@
-###Prueba técnica de ASV
+### Prueba técnica de ASV
 
 #### ¿Cómo haríamos para mejorar el tiempo de respuesta de este servicio?
-* respuesta
+* Como la información de los municipios no es normal que se cambia periódicamente, se podra cargar todos los
+  municipios en la api nuestra en un fichero o en una base de datos `si es necesario` y al dar la respuesta al cliente se consultara este fichero
+  y que cada cierto tiempo "un dia o según la necesidad" se actualizara este fichero llamando a AEMET.
 
 #### ¿Por qué motivo piensas que AEMET ha implementado este servicio devolviendo la url?
 * respuesta
