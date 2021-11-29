@@ -9,7 +9,7 @@
   cd ASV-Api
   npm i 
 ```
-### Ejecutar la api
+### Ejecutar el repositorio
 ```sh
   npm run dev
 ```
