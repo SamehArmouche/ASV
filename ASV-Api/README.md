@@ -1,6 +1,6 @@
 # API ASV 
 
-### Descargar el api.
+### Descargar el repositorio.
 ```sh
   git clone https://github.com/SamehArmouche/ASV.git
 ```

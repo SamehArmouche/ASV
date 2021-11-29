@@ -4,7 +4,7 @@ const router = Router();
 const fetch = require('cross-fetch')
 const API_URL_BASE = "https://opendata.aemet.es/opendata/api/";
 const config = require('../../config');
-const api_key=config.API_KEY;
+const api_key=config.API_KEY || 'tu_apiKey';
 const headers ={
   'Content-Type': 'application/json',
   'api_key': api_key
