@@ -1,6 +1,6 @@
 # API ASV 
 
-### Descargar el api.
+### Descargar el repositorio.
 ```sh
   git clone https://github.com/SamehArmouche/ASV.git
 ```
@@ -9,7 +9,7 @@
   cd ASV-Api
   npm i 
 ```
-### Ejecutar el repositorio
+### Ejecutar la api
 ```sh
   npm run dev
 ```
