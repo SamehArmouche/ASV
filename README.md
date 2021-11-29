@@ -6,7 +6,7 @@
 #### ¿Por qué motivo piensas que AEMET ha implementado este servicio devolviendo la url?
 * respuesta
 
-#### Los clientes les gustaría que se recordara el último municipio seleccionado y que automáticamente les cargue la predicción del día siguiente. ¿Cómo lo podríamos hacer?
+#### Los clientes  les gustaría que se recordara el último municipio seleccionado y que automáticamente les cargue la predicción del día siguiente. ¿Cómo lo podríamos hacer?
 * respuesta
 
 #### La  aplicación  está  teniendo  tanto  éxito  que  estamos  causando  una  carga  excesiva  en  el
