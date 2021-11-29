@@ -30,4 +30,6 @@
 ### Aspectos para mejorar.
 ##### Por coincidir con las entregas del fin del curso:
 * No había bastante tiempo para mejorar la API, había que gestionar los errores devloviendo el codigo de estados correspondientes.
+  * Ejemplo 1: api_key es erroena y que nuestra API no tendra disponible la info de AEMET.
+  * Ejemplo 2: Que el municipio a buscar es erroneo y que no existe informacion de AEMET sobre el mismo.
 * Tenía poco tiempo para investigar mas sobre AutoComplete de Angular y terminar el cliente.
