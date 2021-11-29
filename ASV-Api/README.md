@@ -10,6 +10,11 @@
   npm i 
 ```
 ### Ejecutar la api
+* En el fichero `/routes/index.js` esta definida el api_key o se coge del .env o se mete manualemnte.
+* Ahí habra que meter la api_key de la persona que va a ejecutar el servicio.
+```js
+const api_key=config.API_KEY || 'tu_apiKey';
+```
 ```sh
   npm run dev
 ```
